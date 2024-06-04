@@ -1,0 +1,23 @@
+<p>Budget List!!!</p>
+<table border="1" boder-collapse="collapse">
+    <thead>
+        <tr>
+            <td>Expense</td>
+            <td>Date</td>
+            <td>Amount</td>
+            <td>Action</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let data of values">
+            <td>{{data.name}}</td>
+            <td>{{data.date}}</td>
+            <td>{{data.amount}}</td>
+            <td>
+                <span (click)="updateExpense(data)">Update</span> &nbsp; &nbsp;
+                <span (click)="deleteExpense(data)">Delete</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
