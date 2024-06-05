@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="insertData()">
     <div class="form-group">
-        <label for="expense">id </label>
-        <input type="text" id="id" formControlName="id" class="form-control" />
+        <label for="expense" hidden>id </label>
+        <input type="text" id="id" formControlName="id" class="form-control" hidden />
 
         <label for="expense">Expense : </label>
         <input type="text" id="expense" formControlName="expense" class="form-control" />

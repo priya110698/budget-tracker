@@ -18,7 +18,7 @@ export class ListBudgetComponent {
   }
   
   getValues() {
-    this.httpClient.get("http://localhost:8080/getStudents").subscribe((data: any) => {
+    this.commonService.getBudgetlist().subscribe((data: any) => {
       this.values = data;
     });
   }

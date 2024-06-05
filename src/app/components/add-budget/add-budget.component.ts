@@ -25,7 +25,7 @@ export class AddBudgetComponent {
 
     // this.form.controls['expenseDate'].setValue();
     this.form.controls['expenseDate'].patchValue(this.formatDate(new Date()));
-    this.listData();
+    
   }
 
   ngOnInit() {
@@ -45,16 +45,13 @@ export class AddBudgetComponent {
 
   insertData() {
     let ctrls = this.form.controls;
-    if(ctrls['id'].value) {
-      let data = {
-        "name": ctrls['expense'].value,
-        "amount": ctrls['expenseAmnt'].value,
-        "date": ctrls['expenseDate'].value
-      };
-      this.httpClient.put(`http://localhost:8080/update/${ctrls['id'].value}?name=${ctrls['expense'].value}`, {}).subscribe((data: any) => {
+    if (ctrls['id'].value) {
+      this.httpClient.put(`http://localhost:8080/update/${ctrls['id'].value}?name=${ctrls['expense'].value}&amount=${ctrls['expenseAmnt'].value}&date=${ctrls['expenseDate'].value}`, {}).subscribe((data: any) => {
         console.log("datavalues", data);
         this.form.reset();
+        this.listData();
       });
+      return;
     }
 
     let data = {
@@ -65,11 +62,12 @@ export class AddBudgetComponent {
     this.httpClient.post("http://localhost:8080/insertStudent", data).subscribe((data: any) => {
       console.log("datavalues", data);
       this.form.reset();
+      this.listData();
     });
   }
 
   listData() {
-    this.httpClient.get("http://localhost:8080/getStudents").subscribe((data: any) => {
+    this.commonService.getBudgetlist().subscribe((data: any) => {
       this.values = data;
     });
   }

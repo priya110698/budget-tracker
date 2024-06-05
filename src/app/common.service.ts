@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -5,9 +6,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CommonService {
+  
   data = new BehaviorSubject(null);
   data$ = this.data.asObservable();
-  constructor() {
+  constructor(public httpClient: HttpClient) {
 
   }
 
@@ -17,5 +19,9 @@ export class CommonService {
 
   getData() {
     return this.data$;
+  }
+
+  getBudgetlist() {
+    return this.httpClient.get("http://localhost:8080/getStudents");
   }
 }
