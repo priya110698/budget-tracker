@@ -24,4 +24,9 @@ export class CommonService {
   getBudgetlist() {
     return this.httpClient.get("http://localhost:8080/getStudents");
   }
+
+  geTotExpense() {
+    return this.httpClient.get("http://localhost:8080/getTotalExpense");
+  }
+
 }

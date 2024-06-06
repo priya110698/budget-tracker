@@ -13,6 +13,7 @@ import { CommonService } from '../../common.service';
 export class ListBudgetComponent {
   values: any;
   @Output() updateData = new EventEmitter<any>();
+  totExpense = 0;
   constructor(public httpClient: HttpClient, public commonService: CommonService) {
     this.getValues();
   }
@@ -20,6 +21,10 @@ export class ListBudgetComponent {
   getValues() {
     this.commonService.getBudgetlist().subscribe((data: any) => {
       this.values = data;
+    });
+
+    this.commonService.geTotExpense().subscribe((data: any) => {
+      this.totExpense = data;
     });
   }
 
