@@ -2,13 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; // Import ReactiveFormsModule
 import { CommonService } from '../../common.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-add-budget',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatDatepickerModule],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }, provideNativeDateAdapter()],
   templateUrl: './add-budget.component.html',
-  styleUrl: './add-budget.component.scss'
+  styleUrl: './add-budget.component.scss',
 })
 export class AddBudgetComponent {
   form: FormGroup; // Declare a FormGroup property
@@ -25,12 +32,10 @@ export class AddBudgetComponent {
 
     // this.form.controls['expenseDate'].setValue();
     this.form.controls['expenseDate'].patchValue(this.formatDate(new Date()));
-    
   }
 
   ngOnInit() {
     this.commonService.getData().subscribe((updatedData: any) => {
-      console.log("ffdata", updatedData);
       if (updatedData) {
         this.form.setValue({
           id: updatedData.id,

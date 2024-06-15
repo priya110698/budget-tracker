@@ -2,11 +2,14 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonService } from '../../common.service';
+import { MatIconModule } from '@angular/material/icon';
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-list-budget',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './list-budget.component.html',
   styleUrl: './list-budget.component.scss'
 })
@@ -17,7 +20,7 @@ export class ListBudgetComponent {
   constructor(public httpClient: HttpClient, public commonService: CommonService) {
     this.getValues();
   }
-  
+
   getValues() {
     this.commonService.getBudgetlist().subscribe((data: any) => {
       this.values = data;
@@ -29,8 +32,20 @@ export class ListBudgetComponent {
   }
 
   deleteExpense(data: any) {
-    this.httpClient.delete(`http://localhost:8080/delete/${data.id}`).subscribe((data: any) => {
-      this.getValues();
+    Swal.fire({
+      title: 'Do you want delete it',
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+      icon: 'warning'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.httpClient.delete(`http://localhost:8080/delete/${data.id}`).subscribe((data: any) => {
+          this.getValues();
+        });
+      } else
+        Swal.fire(' Cancelled', '', 'error')
     });
   }
 

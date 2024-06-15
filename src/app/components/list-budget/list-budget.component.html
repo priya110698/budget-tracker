@@ -2,10 +2,10 @@
 <table border="1" boder-collapse="collapse">
     <thead>
         <tr>
-            <td>Expense</td>
-            <td>Date</td>
-            <td>Amount</td>
-            <td>Action</td>
+            <th>Expense</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Action</th>
         </tr>
     </thead>
 
@@ -15,8 +15,12 @@
             <td>{{data.date | date: 'dd-MMM-YYYY'}}</td>
             <td>{{data.amount}}</td>
             <td>
-                <span (click)="updateExpense(data)">Update</span> &nbsp; &nbsp;
-                <span (click)="deleteExpense(data)">Delete</span>
+                <span (click)="updateExpense(data)"><mat-icon aria-hidden="false" aria-label="edit icon"
+                        fontIcon="edit"></mat-icon></span> &nbsp; &nbsp;
+
+                <span (click)="deleteExpense(data)"> <mat-icon aria-hidden="false" aria-label="delete icon"
+                        fontIcon="delete_forever"></mat-icon>
+                </span>
             </td>
         </tr>
     </tbody>
