@@ -3,28 +3,34 @@
     <div class="form-group">
         <label for="expense" hidden>id </label>
         <input type="text" id="id" formControlName="id" class="form-control" hidden />
+        <mat-grid-list cols="1" rowHeight="2:1">
+            <p>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Expense :</mat-label>
+                    <input matInput placeholder="Enter Expenses" type="text" id="expense" formControlName="expense">
+                </mat-form-field>
+            </p>
+        </mat-grid-list>
 
         <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Expense :</mat-label>
-                <input matInput placeholder="Enter Expenses" type="text" id="expense" formControlName="expense">
-            </mat-form-field>
+            <mat-grid-list cols="1" rowHeight="2:1">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" id="expenseDate" formControlName="expenseDate">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </mat-grid-list>
         </p>
 
         <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="picker" id="expenseDate" formControlName="expenseDate">
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </p>
-
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Amount :</mat-label>
-                <input matInput placeholder="Enter Amount" type="number" id="expenseAmnt" formControlName="expenseAmnt">
-            </mat-form-field>
+            <mat-grid-list cols="1" rowHeight="2:1">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Amount :</mat-label>
+                    <input matInput placeholder="Enter Amount" type="number" id="expenseAmnt"
+                        formControlName="expenseAmnt">
+                </mat-form-field>
+            </mat-grid-list>
         </p>
     </div>
     <button type="submit" color="primary" mat-raised-button>Submit</button>
