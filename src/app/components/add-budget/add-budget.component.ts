@@ -48,23 +48,30 @@ export class AddBudgetComponent {
     });
   }
 
+  
+  // DO Video for Interview Preparation 
+  // 1. Add date selection in List screen based on that write query for particular date expense
+  // 2. Next Week Date range selection - with in 2 dates have to fetch expense -- fromdate & todate selsction
+  // 3. Change delete logic, We never delete any data's
+  // 4. Write Encryption / Decryption Logic in FrontEnd & API
 
   insertData() {
     let ctrls = this.form.controls;
+    let data = {
+      "name": ctrls['expense'].value,
+      "amount": ctrls['expenseAmnt'].value,
+      "date": this.formatDate(ctrls['expenseDate'].value)
+    };
+
     if (ctrls['id'].value) {
-      this.httpClient.put(`http://localhost:8080/update/${ctrls['id'].value}?name=${ctrls['expense'].value}&amount=${ctrls['expenseAmnt'].value}&date=${ctrls['expenseDate'].value}`, {}).subscribe((data: any) => {
+      this.httpClient.post(`http://localhost:8080/update/${ctrls['id'].value}`, data).subscribe((data: any) => {
         console.log("datavalues", data);
         this.form.reset();
         this.listData();
       });
       return;
     }
-
-    let data = {
-      "name": ctrls['expense'].value,
-      "amount": ctrls['expenseAmnt'].value,
-      "date": ctrls['expenseDate'].value
-    };
+    
     this.httpClient.post("http://localhost:8080/insertStudent", data).subscribe((data: any) => {
       console.log("datavalues", data);
       this.form.reset();

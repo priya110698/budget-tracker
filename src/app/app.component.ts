@@ -33,7 +33,11 @@ export class AppComponent {
     });
   }
 
-  tab() {
-   this.link = "Expense List";
+  tab(link: any) {
+    // this.link = "Expense List";
+    this.activeLink = link;
+    if(this.activeLink == 'Add Expenses') {
+      this.commonService.updateData(false);
+    }
   }
 }
