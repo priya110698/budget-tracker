@@ -32,7 +32,7 @@ export class AddBudgetComponent {
     });
 
     // this.form.controls['expenseDate'].setValue();
-    this.form.controls['expenseDate'].patchValue(this.formatDate(new Date()));
+    this.form.controls['expenseDate'].patchValue(this.commonService.formatDate(new Date()));
   }
 
   ngOnInit() {
@@ -49,7 +49,7 @@ export class AddBudgetComponent {
   }
 
   
-  // DO Video for Interview Preparation 
+  // TODO List
   // 1. Add date selection in List screen based on that write query for particular date expense
   // 2. Next Week Date range selection - with in 2 dates have to fetch expense -- fromdate & todate selsction
   // 3. Change delete logic, We never delete any data's
@@ -60,7 +60,7 @@ export class AddBudgetComponent {
     let data = {
       "name": ctrls['expense'].value,
       "amount": ctrls['expenseAmnt'].value,
-      "date": this.formatDate(ctrls['expenseDate'].value)
+      "date": this.commonService.formatDate(ctrls['expenseDate'].value)
     };
 
     if (ctrls['id'].value) {
@@ -83,16 +83,6 @@ export class AddBudgetComponent {
     this.commonService.getBudgetlist().subscribe((data: any) => {
       this.values = data;
     });
-  }
-
-  formatDate(date: string | number | Date) {
-    const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    return [year, month, day].join('-');
   }
 
 }
